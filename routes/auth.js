@@ -9,11 +9,11 @@ const {
 const verifyToken = require('../middleware/auth');
 
 // Public routes
-router.get('/register', register);
-router.get('/login', login);
+router.post('/register', register);
+router.post('/login', login);
 
 // Private routes
-router.get('/logout', verifyToken, logout);
+router.post('/logout', verifyToken, logout);
 router.get('/profile', verifyToken, getProfile);
 
 module.exports = router;

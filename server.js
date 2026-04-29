@@ -21,11 +21,8 @@ app.use(
 );
 
 // Routes
-app.use('/register', require('./routes/auth'));
-app.use('/login', require('./routes/auth'));
-app.use('/logout', require('./routes/auth'));
-app.use('/profile', require('./routes/auth'));
-app.use('/crypto', require('./routes/crypto'));
+app.use('/api/auth', require('./routes/auth'));
+app.use('/api/crypto', require('./routes/crypto'));
 
 // Health check route
 app.get('/', (req, res) => {
