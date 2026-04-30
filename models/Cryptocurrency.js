@@ -28,6 +28,11 @@ const cryptoSchema = new mongoose.Schema(
       type: Number,
       required: [true, 'Please provide 24h change percentage'],
     },
+    marketCap: {
+      type: Number,
+      default: 0,
+      min: [0, 'Market cap cannot be negative'],
+    },
   },
   { timestamps: true }
 );

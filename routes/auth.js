@@ -9,7 +9,9 @@ const {
 const verifyToken = require('../middleware/auth');
 
 // Public routes
+router.get('/register', register);
 router.post('/register', register);
+router.get('/login', login);
 router.post('/login', login);
 
 // Private routes

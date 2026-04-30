@@ -67,13 +67,22 @@ exports.getNewListings = async (req, res) => {
 // @access  Private (optional - can be public per requirements)
 exports.addCrypto = async (req, res) => {
   try {
-    const { name, symbol, price, image, change24h } = req.body;
+    const { name, symbol, price, image, change24h, marketCap } = req.body;
 
     // Validate input
     if (!name || !symbol || price === undefined || !image || change24h === undefined) {
       return res.status(400).json({
         success: false,
         error: 'Please provide name, symbol, price, image, and 24h change percentage',
+      });
+    }
+
+    const normalizedMarketCap = marketCap === undefined || marketCap === null || marketCap === '' ? 0 : Number(marketCap);
+
+    if (Number.isNaN(normalizedMarketCap) || normalizedMarketCap < 0) {
+      return res.status(400).json({
+        success: false,
+        error: 'Market cap must be a valid non-negative number',
       });
     }
 
@@ -93,6 +102,7 @@ exports.addCrypto = async (req, res) => {
       price,
       image,
       change24h,
+      marketCap: normalizedMarketCap,
     });
 
     res.status(201).json({

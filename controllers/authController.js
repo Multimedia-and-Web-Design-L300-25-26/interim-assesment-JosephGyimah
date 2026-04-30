@@ -8,12 +8,18 @@ const generateToken = (id) => {
   });
 };
 
+const getInput = (req) => ({
+  name: req.body?.name ?? req.query?.name,
+  email: req.body?.email ?? req.query?.email,
+  password: req.body?.password ?? req.query?.password,
+});
+
 // @route   GET /register
 // @desc    Register a new user
 // @access  Public
 exports.register = async (req, res) => {
   try {
-    const { name, email, password } = req.body;
+    const { name, email, password } = getInput(req);
 
     // Validate input
     if (!name || !email || !password) {
@@ -71,7 +77,7 @@ exports.register = async (req, res) => {
 // @access  Public
 exports.login = async (req, res) => {
   try {
-    const { email, password } = req.body;
+    const { email, password } = getInput(req);
 
     // Validate input
     if (!email || !password) {
